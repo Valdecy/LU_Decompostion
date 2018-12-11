@@ -17,11 +17,11 @@ import numpy as np
 # Function
 def LU_partial_decomposition(matrix):
     n, m = matrix.shape
-    P = np.identity(n)
-    L = np.identity(n)
-    U = matrix.copy()
-    PF = np.identity(n)
-    LF = np.zeros((n,n))
+    P    = np.identity(n)
+    L    = np.identity(n)
+    U    = matrix.copy()
+    PF   = np.identity(n)
+    LF   = np.zeros((n,n))
     for k in range(0, n - 1):
         index = np.argmax(abs(U[k:,k]))
         index = index + k 
@@ -33,8 +33,8 @@ def LU_partial_decomposition(matrix):
             LF = np.dot(P,LF)
         L = np.identity(n)
         for j in range(k+1,n):
-            L[j,k] = -(U[j,k] / U[k,k])
-            LF[j,k] = (U[j,k] / U[k,k])
+            L[j,k]  = -(U[j,k] / U[k,k])
+            LF[j,k] =  (U[j,k] / U[k,k])
         U = np.dot(L,U)
     np.fill_diagonal(LF, 1)
     return PF, LF, U
