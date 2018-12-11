@@ -23,18 +23,18 @@ def LU_partial_decomposition(matrix):
     PF   = np.identity(n)
     LF   = np.zeros((n,n))
     for k in range(0, n - 1):
-        index = np.argmax(abs(U[k:,k]))
+        index = np.argmax(abs(U[k:, k]))
         index = index + k 
         if index != k:
             P = np.identity(n)
-            P[[index,k],k:n] = P[[k,index],k:n]
-            U[[index,k],k:n] = U[[k,index],k:n] 
-            PF = np.dot(P,PF)
-            LF = np.dot(P,LF)
+            P[[index, k], k:n] = P[[k, index], k:n]
+            U[[index, k], k:n] = U[[k, index], k:n] 
+            PF = np.dot(P, PF)
+            LF = np.dot(P, LF)
         L = np.identity(n)
         for j in range(k+1,n):
-            L[j,k]  = -(U[j,k] / U[k,k])
-            LF[j,k] =  (U[j,k] / U[k,k])
+            L[j, k]  = -(U[j, k] / U[k, k])
+            LF[j, k] =  (U[j, k] / U[k, k])
         U = np.dot(L,U)
     np.fill_diagonal(LF, 1)
     return PF, LF, U
